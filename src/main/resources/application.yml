@@ -29,6 +29,8 @@ spring:
               uri: lb://conversion-service
               predicates:
                 - Path=/api/v1/conversion/**
+              filters:
+                - StripPrefix=2
 
 eureka:
   client:
