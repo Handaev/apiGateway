@@ -28,7 +28,7 @@ spring:
             - id: conversion-service
               uri: lb://conversion-service
               predicates:
-                - Path=/conversion/**
+                - Path=/api/v1/conversion/**
 
 eureka:
   client:
