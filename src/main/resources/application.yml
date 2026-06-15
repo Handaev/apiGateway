@@ -1,0 +1,42 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: client1
+              uri: lb://eclient
+              predicates:
+                - Path=/main/test
+                - Method=GET
+
+            - id: client2
+              uri: lb://eclient2
+              predicates:
+                - Path=/new/test
+                - Method=GET
+
+            - id: conversion-service
+              uri: lb://conversion-service
+              predicates:
+                - Path=/api/v1/conversion/**
+              filters:
+                - StripPrefix=2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  pattern:
+    console: "%C{1} [%-5level] %d{HH:mm:ss} - %msg%n"

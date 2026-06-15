@@ -21,19 +21,13 @@ repositories {
 extra["springCloudVersion"] = "2025.1.1"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc")
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
+
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-    testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
